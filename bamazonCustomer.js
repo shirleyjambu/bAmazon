@@ -9,7 +9,7 @@ const db = mysql.createConnection(
 
 db.connect((err) =>{
   if(err)throw err;
-  start();
+  //start();
 });
 
 const start = () =>{
@@ -29,7 +29,8 @@ const start = () =>{
             product_name: data[i].product_name,
             department_name: data[i].department_name,
             price: data[i].price,
-            stock_quantity: data[i].stock_quantity
+            stock_quantity: data[i].stock_quantity,
+            product_sales: data[i].product_sales
           }
         }
 
@@ -56,11 +57,13 @@ itemFetcher.then((items) => {
         
         if(userInput.item.stock_quantity < userInput.quantity){
           console.log("Insufficient Quantity!");
-          //getUserBid();
+          doAgain();
         }else{
           let quantity = userInput.item.stock_quantity - userInput.quantity;
           let cost = userInput.quantity * userInput.item.price;
-          updateProducts(quantity, userInput.item.item_id, cost);
+          let pSales = userInput.item.product_sales + cost;
+        
+          updateProducts(quantity, userInput.item.item_id, cost, pSales);
         }
     });
 });
@@ -70,17 +73,36 @@ itemFetcher.catch((err)=>{
 });
 }
   
-const updateProducts = (quantity,item_id,cost) =>{
+const updateProducts = (quantity, item_id, cost, pSales) =>{
   const uWhere = {item_id};
-  const uSet = {stock_quantity:quantity};
-  const uQuery = "UPDATE products SET ? WHERE ?";
+  const uSet = {stock_quantity:quantity, product_sales:pSales};
+  const uQuery = " UPDATE products SET ? WHERE ?";
+
   const query = db.query(uQuery, [uSet,uWhere], function(err,updatedProductDb){
      if(err) throw err;
      console.log(query.sql);
      console.log(`${updatedProductDb.affectedRows} Product items updated!`);
      console.log('Your Total Price : ' + cost);
-     //getUserInput();
+     doAgain();
    } )
 }
 
-module.exports = {};
+const doAgain = () =>{
+  inquirer.prompt([
+    {
+      type:'confirm',
+      message: 'Do you want to continue?',
+      name:'userConfirm'
+    }
+  ]).then(({userConfirm}) => {
+    if(userConfirm){
+      start();
+    }else{
+      process.exit(0);
+    }
+  });
+}
+
+module.exports = {
+  start: start
+};

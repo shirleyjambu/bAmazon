@@ -7,6 +7,7 @@ Uses Inquirer, mySql npm's
 
 ### Challenge #1: Customer View (Minimum Requirement)
 1. The user is prompted asking to choose the items for sale with details of Product Name, Price and Available Quantity displayed.
+  2. Modify the products table so that there's a product_sales column, and modify your `bamazonCustomer.js` app so that when a customer purchases anything from the store, the price of the product multiplied by the quantity purchased is added to the product's product_sales column.
 
 2. Once he chooses an item, the user is prompted for a quantity. Once the user enters the quantity, it is checked against the available stock, if it is lesser an appropriate message is displayed.
 
@@ -40,18 +41,6 @@ and the cost price will be displayed.
 - - -
 
 ### Challenge #3: Supervisor View (Final Level)
-
-1. Create a new MySQL table called `departments`. Your table should include the following columns:
-
-   * department_id
-
-   * department_name
-
-   * over_head_costs (A dummy number you set for each department)
-
-2. Modify the products table so that there's a product_sales column, and modify your `bamazonCustomer.js` app so that when a customer purchases anything from the store, the price of the product multiplied by the quantity purchased is added to the product's product_sales column.
-
-   * Make sure your app still updates the inventory listed in the `products` column.
 
 3. Create another Node app called `bamazonSupervisor.js`. Running this application will list a set of menu options:
 

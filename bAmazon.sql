@@ -9,8 +9,15 @@ CREATE TABLE products(
   product_name VARCHAR(50) NOT NULL,
   department_name VARCHAR(50) default 'MISC',
   price FLOAT(10,2) NOT NULL,
-  stock_quantity INTEGER(10) default 0 
+  stock_quantity INTEGER(10) default 0, 
+  product_sales FLOAT(10,2) default 0
 );
+
+CREATE TABLE departments(
+  department_id INTEGER(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  department_name VARCHAR(50) NOT NULL,
+  over_head_costs FLOAT(10,2) default 0
+);  
 
 -- Mock Data
 INSERT INTO products
@@ -28,5 +35,12 @@ INSERT INTO products
   ('Wireless Charging Station','Tech',13.99,23);
 
 
+INSERT INTO departments
+  (department_name,over_head_costs)
+values
+  ('Toys',55),
+  ('Books',67),
+  ('Home',89),
+  ('Tech',56);
 
    

@@ -10,7 +10,7 @@ const db = mysql.createConnection(
 
 db.connect((err) =>{
   if(err)throw err;
-  start();
+  //start();
 });
 
 const start =() => {
@@ -50,8 +50,9 @@ const products =(mode)=>{
     if(err) throw err;
     
     console.table(data);
+    doAgain();
   });
-  console.log(query.sql);
+  
 }
 
 const getProductDetails =()=>{
@@ -88,7 +89,7 @@ const addProduct = (userInput) => {
      function (err, dbResult) {
       if(err) throw err;
       console.log(`${dbResult.affectedRows} item inserted!\n`);
-       //getUserInput();
+      doAgain();
     });
 };
 
@@ -145,7 +146,7 @@ itemFetcher.then((items) => {
           if(err) throw err;
           console.log(query.sql);
           console.log(`${updatedProductDb.affectedRows} Product items updated!`);
-          //getUserInput();
+          doAgain();
         } )
     }).catch((err)=>{
       if(err) throw err;
@@ -156,3 +157,23 @@ itemFetcher.catch((err)=>{
   console.log(err);
 });
 }
+
+const doAgain = () =>{
+  inquirer.prompt([
+    {
+      type:'confirm',
+      message: 'Do you want to continue?',
+      name:'userConfirm'
+    }
+  ]).then(({userConfirm}) => {
+    if(userConfirm){
+      start();
+    }else{
+      process.exit(0);
+    }
+  });
+}
+
+module.exports = {
+  start: start
+};
