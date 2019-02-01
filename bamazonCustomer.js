@@ -80,9 +80,9 @@ const updateProducts = (quantity, item_id, cost, pSales) =>{
 
   const query = db.query(uQuery, [uSet,uWhere], function(err,updatedProductDb){
      if(err) throw err;
-     console.log(query.sql);
-     console.log(`${updatedProductDb.affectedRows} Product items updated!`);
-     console.log('Your Total Price : ' + cost);
+     //console.log(query.sql);
+     //console.log(`${updatedProductDb.affectedRows} Product items updated!`);
+     console.log('Purchase Complete. Your Total Price : $' + cost);
      doAgain();
    } )
 }

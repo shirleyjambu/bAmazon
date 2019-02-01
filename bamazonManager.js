@@ -88,7 +88,7 @@ const addProduct = (userInput) => {
     "INSERT INTO products SET ?", itemData,
      function (err, dbResult) {
       if(err) throw err;
-      console.log(`${dbResult.affectedRows} item inserted!\n`);
+      console.log(`${dbResult.affectedRows} Product Added!\n`);
       doAgain();
     });
 };
@@ -139,13 +139,16 @@ itemFetcher.then((items) => {
         }
       }
     ]).then((userInput)=>{
+
+        let quantity = parseInt(userInput.stock_quantity) + parseInt(userInput.item.stock_quantity);
+        
         const uWhere = {item_id : userInput.item.item_id};
-        const uSet = {stock_quantity : userInput.stock_quantity};
+        const uSet = {stock_quantity : quantity};
         const query = 
         db.query("UPDATE products SET ? WHERE ?", [uSet,uWhere], function(err,updatedProductDb){
           if(err) throw err;
-          console.log(query.sql);
-          console.log(`${updatedProductDb.affectedRows} Product items updated!`);
+          //console.log(query.sql);
+          console.log(`${updatedProductDb.affectedRows} Inventory Updated!`);
           doAgain();
         } )
     }).catch((err)=>{

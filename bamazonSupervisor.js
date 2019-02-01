@@ -62,7 +62,7 @@ const createDept = (deptData) =>{
  
   const query = db.query(sQuery, deptData , function(err, dbResult){
     if(err) throw err;
-    console.log(`${dbResult.affectedRows} department inserted!\n`);
+    console.log(`${dbResult.affectedRows} Department Added!\n`);
     display("D");
   });
 }
