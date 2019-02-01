@@ -16,11 +16,9 @@ var startGlobal = () => {
     switch(option){
       case 'Customer':
         customer.start();
-        console.log("Back from Customer");
         break;
       case 'Manager':
         manager.start();
-        console.log("Back from Customer");
         break;
       case 'Supervisor':
         supervisor.start();

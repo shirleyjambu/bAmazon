@@ -71,7 +71,17 @@ const createDept = (deptData) =>{
 const display = (mode) => {
   let sQuery ="";
   if(mode === 'PS'){
-    sQuery = "SELECT department_name AS 'Department Name',sum(product_sales) AS 'Total Sales' FROM products GROUP BY department_name";
+    sQuery =  "SELECT ";    
+	  sQuery =  sQuery + "d.department_id AS 'Department ID', ";
+	  sQuery =  sQuery + "d.department_name AS 'Department Name', ";
+    sQuery =  sQuery + "d.over_head_costs AS 'Over Head Costs', ";
+    sQuery =  sQuery + "IFNULL(sum(p.product_sales),0) AS 'Product Sales', ";
+    sQuery =  sQuery + "IFNULL((sum(p.product_sales) - d.over_head_costs),0) AS 'Total Profit' ";
+    sQuery =  sQuery + "FROM products p ";
+    sQuery =  sQuery + "RIGHT JOIN departments d ";
+    sQuery =  sQuery + "ON d.department_name=p.department_name ";
+    sQuery =  sQuery + "GROUP BY d.department_name ";
+
   }else{
     sQuery = "SELECT * FROM departments";
   }
