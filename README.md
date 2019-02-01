@@ -1,9 +1,13 @@
 # bAmazon
+This application is like an Amazon-like storefront that will take in orders from customers and deplete stock from the store's inventory, track product sales across your store's departments and then provide a summary of the highest-grossing departments in the store.
 
+# Tech Used
 Using Node.js & MySQL
 Uses inquirer, mysql, console.table npm's
 
-## Instructions
+##  Video Link:
+https://drive.google.com/file/d/13DY1BXfnVtHsPTHPATKW1_PxjtaXpAiu/view
+
 
 # Customer View
 1. The user is prompted asking to choose the items for sale with details of Product Name, Price and Available Quantity displayed.
@@ -45,6 +49,4 @@ Logging in as Supervisor will list these set of menu options:
 
  * The Create New Department allows the user create a new Department.
 
- Video Link:
- https://drive.google.com/file/d/13DY1BXfnVtHsPTHPATKW1_PxjtaXpAiu/view
 
